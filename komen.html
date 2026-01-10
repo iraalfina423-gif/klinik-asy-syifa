@@ -1,33 +1,68 @@
-<div class="review-compact">
-  <div class="top">
-    <span class="name">Rizky Pratama</span>
-    <span class="stars">★★★★☆</span>
+<div class="review-card">
+  <div class="review-header">
+    <div class="customer-info">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" alt="Foto pelanggan" class="avatar">
+      <div>
+        <h4>Aisyah Ramadhani</h4>
+        <div class="stars">
+          ★★★★★
+        </div>
+      </div>
+    </div>
+    <span class="review-date">2 hari lalu</span>
   </div>
-  <p>Pengiriman cepat, produk oke, cuma box agak penyok sedikit. Overall puas sih 4.5/5</p>
-  <span class="date">5 Jan 2026</span>
+  
+  <p class="review-text">
+    Barangnya bagus banget, sesuai foto dan deskripsi! Packing aman, pengiriman cepat juga. 
+    Pasti bakal beli lagi di sini 🥰
+  </p>
 </div>
 
 <style>
-.review-compact {
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
+.review-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: 600px;
 }
 
-.top {
+.review-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.6rem;
-  font-weight: 600;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.customer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .stars {
-  color: #fbbf24;
+  color: #f59e0b;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
 
-.date {
-  font-size: 0.8rem;
-  color: #9ca3af;
-  display: block;
-  margin-top: 0.4rem;
+.review-date {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.review-text {
+  margin: 0;
+  line-height: 1.6;
+  color: #374151;
 }
 </style>
