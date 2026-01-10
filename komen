@@ -1,0 +1,33 @@
+<div class="review-compact">
+  <div class="top">
+    <span class="name">Rizky Pratama</span>
+    <span class="stars">★★★★☆</span>
+  </div>
+  <p>Pengiriman cepat, produk oke, cuma box agak penyok sedikit. Overall puas sih 4.5/5</p>
+  <span class="date">5 Jan 2026</span>
+</div>
+
+<style>
+.review-compact {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.stars {
+  color: #fbbf24;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  display: block;
+  margin-top: 0.4rem;
+}
+</style>
