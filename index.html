@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowchart Pendaftaran Klinik Detail</title>
+    <title>Flowchart Pendaftaran FKTP</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #7f8c8d;
-            --success: #27ae60; /* Hijau untuk BPJS */
-            --info: #2980b9;    /* Biru untuk UMUM */
-            --warning: #f39c12; /* Oranye untuk Keputusan */
-            --danger: #c0392b;
-            --bg: #f4f7f6;
+            --primary: #00897b; /* Teal khas kesehatan */
+            --bpjs: #2e7d32;
+            --umum: #0277bd;
+            --decision: #f9a825;
+            --text: #333;
+            --bg: #f1f8e9;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: var(--bg);
+            color: var(--text);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,165 +25,172 @@
             margin: 0;
         }
 
-        .flowchart-container {
+        .flowchart {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
             max-width: 1000px;
+            width: 100%;
         }
 
-        /* Styling Kotak/Node */
-        .node {
+        /* Objek Kotak */
+        .box {
             background: white;
             border: 2px solid var(--primary);
             padding: 15px;
-            width: 220px;
+            width: 240px;
             text-align: center;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            font-size: 13px;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 600;
             position: relative;
-            z-index: 2;
         }
 
-        .start-end {
+        .terminal {
             background: var(--primary);
             color: white;
             border-radius: 50px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         /* Kotak Keputusan (Belah Ketupat) */
-        .decision {
-            background: #fffbe6;
-            border: 2px solid var(--warning);
-            width: 160px;
+        .diamond {
+            background: #fffde7;
+            border: 2px solid var(--decision);
+            width: 150px;
             height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
             margin: 20px 0;
-            padding: 20px;
+            padding: 15px;
+            font-size: 12px;
         }
 
-        /* Garis Penghubung */
-        .line {
+        /* Garis & Panah */
+        .arrow {
             width: 2px;
-            height: 40px;
-            background: var(--secondary);
+            height: 30px;
+            background: #999;
             position: relative;
         }
 
-        .line::after {
+        .arrow::after {
             content: '▼';
             position: absolute;
             bottom: -8px;
-            left: -5.5px;
+            left: -5px;
             font-size: 10px;
-            color: var(--secondary);
+            color: #999;
         }
 
-        /* Pengaturan Percabangan */
-        .branch-wrapper {
+        /* Kontainer Percabangan */
+        .row {
             display: flex;
             justify-content: center;
-            width: 100%;
             gap: 40px;
+            width: 100%;
             margin: 10px 0;
         }
 
-        .branch {
+        .column {
             display: flex;
             flex-direction: column;
             align-items: center;
             flex: 1;
         }
 
-        .label-branch {
-            font-size: 12px;
+        .label {
+            font-size: 11px;
+            color: #d32f2f;
             font-weight: bold;
-            color: var(--danger);
             margin-bottom: 5px;
-            background: #eee;
-            padding: 2px 8px;
-            border-radius: 4px;
+            text-transform: uppercase;
         }
 
-        /* Warna Khusus Status */
-        .bpjs-style { border-color: var(--success); background: #eef9f1; color: var(--success); }
-        .umum-style { border-color: var(--info); background: #ebf5fb; color: var(--info); }
-        
-        .sub-text {
+        /* Detail Teks */
+        .detail {
             display: block;
             font-size: 11px;
             font-weight: normal;
             margin-top: 5px;
-            color: #555;
+            color: #666;
+            line-height: 1.3;
         }
+
+        /* Warna Khusus Jalur */
+        .path-bpjs { border-color: var(--bpjs); background-color: #e8f5e9; }
+        .path-umum { border-color: var(--umum); background-color: #e1f5fe; }
     </style>
 </head>
 <body>
 
-    <div class="flowchart-container">
-        <div class="node start-end">Mulai: Pasien Datang</div>
-        <div class="line"></div>
-        <div class="node">Ambil Nomor Antrean & Skrining Kesehatan</div>
-        <div class="line"></div>
+    <h2 style="color: var(--primary);">ALUR PENDAFTARAN PASIEN FKTP</h2>
+    <p style="margin-top: -15px; margin-bottom: 30px;">(Puskesmas / Klinik Pratama)</p>
 
-        <div class="node decision">Status Pasien?</div>
+    <div class="flowchart">
+        <div class="box terminal">Pasien Datang</div>
+        <div class="arrow"></div>
+        
+        <div class="box">Skrining Visual & Pengambilan Nomor Antrean
+            <span class="detail">(Pemisahan pasien batuk/non-batuk)</span>
+        </div>
+        <div class="arrow"></div>
 
-        <div class="branch-wrapper">
-            <div class="branch">
-                <div class="label-branch">BARU</div>
-                <div class="node">Loket Pendaftaran
-                    <span class="sub-text">- Isi Form Identitas<br>- Input SIMRS Klinik<br>- Pembuatan Kartu Berobat</span>
+        <div class="diamond">Status Pasien?</div>
+
+        <div class="row">
+            <div class="column">
+                <div class="label">Pasien Baru</div>
+                <div class="box">Loket Pendaftaran
+                    <span class="detail">1. Wawancara Identitas<br>2. Input SIMPUS/SIM Klinik<br>3. Pembuatan Folder Rekam Medis</span>
                 </div>
             </div>
-            <div class="branch">
-                <div class="label-branch">LAMA</div>
-                <div class="node">Loket Pendaftaran
-                    <span class="sub-text">- Tunjukkan Kartu Berobat<br>- Verifikasi Nama & Alamat</span>
+            <div class="column">
+                <div class="label">Pasien Lama</div>
+                <div class="box">Loket Pendaftaran
+                    <span class="detail">1. Penarikan Data NIK/No.RM<br>2. Pengambilan Berkas Rekam Medis Lama</span>
                 </div>
             </div>
         </div>
 
-        <div class="line"></div>
+        <div class="arrow"></div>
 
-        <div class="node decision">Jenis Penjamin?</div>
+        <div class="diamond">Jenis Pembayaran?</div>
 
-        <div class="branch-wrapper">
-            <div class="branch">
-                <div class="label-branch">BPJS</div>
-                <div class="node bpjs-style">Verifikasi Berkas BPJS
-                    <span class="sub-text">- Cek Rujukan Faskes I<br>- Validasi Keaktifan Peserta</span>
+        <div class="row">
+            <div class="column">
+                <div class="label" style="color: var(--bpjs)">Peserta JKN/BPJS</div>
+                <div class="box path-bpjs">Validasi Aplikasi PCare
+                    <span class="detail">1. Cek Keaktifan Kartu<br>2. Entry Kunjungan Sakit/Protoputif</span>
                 </div>
-                <div class="line"></div>
-                <div class="node bpjs-style">Cetak SEP / Validasi Fingerprint</div>
+                <div class="arrow"></div>
+                <div class="box path-bpjs">Administrasi Non-Bayar
+                    <span class="detail">(Gratis sesuai faskes terdaftar)</span>
+                </div>
             </div>
 
-            <div class="branch">
-                <div class="label-branch">UMUM</div>
-                <div class="node umum-style">Pendaftaran Umum
-                    <span class="sub-text">- Pilih Dokter/Poli<br>- Input Tagihan Awal</span>
+            <div class="column">
+                <div class="label" style="color: var(--umum)">Pasien Umum</div>
+                <div class="box path-umum">Registrasi Pasien Umum
+                    <span class="detail">Identifikasi Poli Tujuan</span>
                 </div>
-                <div class="line"></div>
-                <div class="node umum-style">Pembayaran Kasir Klinik</div>
+                <div class="arrow"></div>
+                <div class="box path-umum">Pembayaran Retribusi
+                    <span class="detail">(Sesuai Perda/Tarif Klinik)</span>
+                </div>
             </div>
         </div>
 
-        <div class="line"></div>
+        <div class="arrow"></div>
 
-        <div class="node">Persiapan Rekam Medis
-            <span class="sub-text">(Distribusi Status ke Poli Tujuan)</span>
-        </div>
-        <div class="line"></div>
-        <div class="node">Pasien Menunggu di Ruang Tunggu Poli</div>
-        <div class="line"></div>
-        <div class="node start-end">Pemeriksaan Dokter</div>
+        <div class="box">Penyerahan Nomor Urut Poli & Kartu Berobat</div>
+        <div class="arrow"></div>
+        <div class="box">Pasien Menuju Ruang Tunggu Poliklinik</div>
+        <div class="arrow"></div>
+        <div class="box terminal">Pemeriksaan Medis</div>
     </div>
 
 </body>
