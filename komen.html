@@ -1,68 +1,17 @@
-<div class="review-card">
-  <div class="review-header">
-    <div class="customer-info">
-      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" alt="Foto pelanggan" class="avatar">
-      <div>
-        <h4>Aisyah Ramadhani</h4>
-        <div class="stars">
-          ★★★★★
-        </div>
-      </div>
+<div class="review-container">
+    <h3>Tulis Ulasan Anda</h3>
+    
+    <div class="star-rating">
+        <input type="radio" name="rating" id="star-5" value="5"><label for="star-5">★</label>
+        <input type="radio" name="rating" id="star-4" value="4"><label for="star-4">★</label>
+        <input type="radio" name="rating" id="star-3" value="3"><label for="star-3">★</label>
+        <input type="radio" name="rating" id="star-2" value="2"><label for="star-2">★</label>
+        <input type="radio" name="rating" id="star-1" value="1"><label for="star-1">★</label>
     </div>
-    <span class="review-date">2 hari lalu</span>
-  </div>
-  
-  <p class="review-text">
-    Barangnya bagus banget, sesuai foto dan deskripsi! Packing aman, pengiriman cepat juga. 
-    Pasti bakal beli lagi di sini 🥰
-  </p>
+
+    <form id="reviewForm">
+        <input type="text" placeholder="Nama Anda" required>
+        <textarea rows="4" placeholder="Ceritakan pengalaman Anda menggunakan produk ini..." required></textarea>
+        <button type="submit">Kirim Ulasan</button>
+    </form>
 </div>
-
-<style>
-.review-card {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 1.2rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  max-width: 600px;
-}
-
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.customer-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.stars {
-  color: #f59e0b;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-}
-
-.review-date {
-  color: #6b7280;
-  font-size: 0.875rem;
-}
-
-.review-text {
-  margin: 0;
-  line-height: 1.6;
-  color: #374151;
-}
-</style>
