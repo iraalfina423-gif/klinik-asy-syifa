@@ -1,60 +1,85 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowchart Detail Pendaftaran Rawat Jalan</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
 
-<div class="flowchart">
-    <div class="node start">MULAI: Pasien Tiba</div>
+.flowchart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+}
 
-    <div class="connector"></div>
-    <div class="node">Ambil Nomor Antrean Pendaftaran</div>
+/* Kotak Standar */
+.node {
+    background: white;
+    border: 2px solid #2c3e50;
+    padding: 15px 20px;
+    border-radius: 5px;
+    width: 250px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
 
-    <div class="connector"></div>
-    <div class="node decision">Apakah Pasien Baru?</div>
-    
-    <div class="branch-container">
-        <div class="branch-line"></div>
-        <div class="branch">
-            <div class="label">Ya</div>
-            <div class="node process">Isi Formulir Data Pasien Baru & Rekam Medis</div>
-        </div>
-        <div class="branch">
-            <div class="label">Tidak</div>
-            <div class="node process">Tunjukkan Kartu Berobat (KIB) / NIK</div>
-        </div>
-    </div>
+/* Kotak Mulai/Selesai */
+.start {
+    background: #2c3e50;
+    color: white;
+    border-radius: 50px;
+}
 
-    <div class="connector"></div>
-    <div class="node">Verifikasi Berkas (KTP/BPJS/Rujukan)</div>
+/* Kotak Keputusan (Belah Ketupat) */
+.decision {
+    background: #fff3e0;
+    border: 2px solid #e67e22;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    padding: 30px 10px;
+    width: 200px;
+}
 
-    <div class="connector"></div>
-    <div class="node decision">Metode Pembayaran?</div>
+/* Kotak Proses */
+.process {
+    background: #e1f5fe;
+    border: 2px dashed #0288d1;
+}
 
-    <div class="branch-container">
-        <div class="branch">
-            <div class="label">BPJS</div>
-            <div class="node process">SEP (Surat Eligibilitas Peserta) Dicetak</div>
-        </div>
-        <div class="branch">
-            <div class="label">UMUM</div>
-            <div class="node process">Pembayaran Administrasi Kasir</div>
-        </div>
-    </div>
+/* Kotak Berhasil */
+.success {
+    background: #e8f5e9;
+    border-color: #2e7d32;
+}
 
-    <div class="connector"></div>
-    <div class="node">Input Data ke SIMRS & Cetak Tracer</div>
-    
-    <div class="connector"></div>
-    <div class="node success">Menuju Ruang Tunggu Poliklinik</div>
+/* Garis Penghubung */
+.connector {
+    width: 2px;
+    height: 30px;
+    background: #2c3e50;
+}
 
-    <div class="connector"></div>
-    <div class="node start">SELESAI</div>
-</div>
+/* Percabangan */
+.branch-container {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+    position: relative;
+}
 
-</body>
-</html>
+.branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #e67e22;
+    margin-bottom: 5px;
+}
