@@ -2,93 +2,59 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Flowchart Pendaftaran Rawat Jalan</title>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f4f7f6;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            display: flex;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .flowchart-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px; /* Jarak antar box */
-        }
-
-        .step {
-            background: white;
-            border: 2px solid var(--primary-color);
-            padding: 15px 25px;
-            border-radius: 8px;
-            width: 250px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        /* Membuat Garis Panah ke Bawah */
-        .step:not(:last-child)::after {
-            content: "↓";
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            color: var(--accent-color);
-        }
-
-        /* Style khusus untuk Decision (Keputusan) */
-        .decision {
-            background: #fff3e0;
-            border: 2px solid #e67e22;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            width: 220px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            font-size: 0.9em;
-        }
-
-        .start-end {
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart Detail Pendaftaran Rawat Jalan</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="flowchart-container">
-        <div class="step start-end">MULAI</div>
+<div class="flowchart">
+    <div class="node start">MULAI: Pasien Tiba</div>
 
-        <div class="step">Pasien Datang & Ambil Nomor Antrean</div>
+    <div class="connector"></div>
+    <div class="node">Ambil Nomor Antrean Pendaftaran</div>
 
-        <div class="step">Pendaftaran di Loket (Identitas & Berkas)</div>
-
-        <div class="step decision">Cek Kelengkapan Berkas (BPJS/Umum)</div>
-
-        <div class="step">Input Data ke Sistem RS (SIMRS)</div>
-
-        <div class="step">Menunggu di Poliklinik Tujuan</div>
-
-        <div class="step">Pemeriksaan oleh Dokter</div>
-
-        <div class="step start-end">SELESAI / FARMASI</div>
+    <div class="connector"></div>
+    <div class="node decision">Apakah Pasien Baru?</div>
+    
+    <div class="branch-container">
+        <div class="branch-line"></div>
+        <div class="branch">
+            <div class="label">Ya</div>
+            <div class="node process">Isi Formulir Data Pasien Baru & Rekam Medis</div>
+        </div>
+        <div class="branch">
+            <div class="label">Tidak</div>
+            <div class="node process">Tunjukkan Kartu Berobat (KIB) / NIK</div>
+        </div>
     </div>
+
+    <div class="connector"></div>
+    <div class="node">Verifikasi Berkas (KTP/BPJS/Rujukan)</div>
+
+    <div class="connector"></div>
+    <div class="node decision">Metode Pembayaran?</div>
+
+    <div class="branch-container">
+        <div class="branch">
+            <div class="label">BPJS</div>
+            <div class="node process">SEP (Surat Eligibilitas Peserta) Dicetak</div>
+        </div>
+        <div class="branch">
+            <div class="label">UMUM</div>
+            <div class="node process">Pembayaran Administrasi Kasir</div>
+        </div>
+    </div>
+
+    <div class="connector"></div>
+    <div class="node">Input Data ke SIMRS & Cetak Tracer</div>
+    
+    <div class="connector"></div>
+    <div class="node success">Menuju Ruang Tunggu Poliklinik</div>
+
+    <div class="connector"></div>
+    <div class="node start">SELESAI</div>
+</div>
 
 </body>
 </html>
