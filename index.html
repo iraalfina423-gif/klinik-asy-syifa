@@ -1,85 +1,175 @@
-body {
-    background-color: #f0f2f5;
-    font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    justify-content: center;
-    padding: 50px 20px;
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart Detail Pendaftaran Pasien</title>
+    <style>
+        :root {
+            --dark: #2c3e50;
+            --blue: #3498db;
+            --orange: #e67e22;
+            --green: #27ae60;
+            --gray: #95a5a6;
+            --bg: #f8f9fa;
+        }
 
-.flowchart {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 800px;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-/* Kotak Standar */
-.node {
-    background: white;
-    border: 2px solid #2c3e50;
-    padding: 15px 20px;
-    border-radius: 5px;
-    width: 250px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    position: relative;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
+        h2 { color: var(--dark); margin-bottom: 30px; }
 
-/* Kotak Mulai/Selesai */
-.start {
-    background: #2c3e50;
-    color: white;
-    border-radius: 50px;
-}
+        .flow-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+        }
 
-/* Kotak Keputusan (Belah Ketupat) */
-.decision {
-    background: #fff3e0;
-    border: 2px solid #e67e22;
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    padding: 30px 10px;
-    width: 200px;
-}
+        /* Elemen Dasar */
+        .node {
+            padding: 15px 20px;
+            width: 220px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: white;
+            border: 2px solid var(--dark);
+            position: relative;
+            z-index: 2;
+        }
 
-/* Kotak Proses */
-.process {
-    background: #e1f5fe;
-    border: 2px dashed #0288d1;
-}
+        .start-end { background: var(--dark); color: white; border-radius: 50px; }
+        
+        .decision {
+            background: #fff3e0;
+            border: 2px solid var(--orange);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            width: 180px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin: 10px 0;
+        }
 
-/* Kotak Berhasil */
-.success {
-    background: #e8f5e9;
-    border-color: #2e7d32;
-}
+        /* Garis Penghubung */
+        .line {
+            width: 2px;
+            height: 30px;
+            background: var(--gray);
+            position: relative;
+        }
 
-/* Garis Penghubung */
-.connector {
-    width: 2px;
-    height: 30px;
-    background: #2c3e50;
-}
+        .line::after {
+            content: '▼';
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            font-size: 10px;
+            color: var(--gray);
+        }
 
-/* Percabangan */
-.branch-container {
-    display: flex;
-    gap: 40px;
-    margin: 20px 0;
-    position: relative;
-}
+        /* Container Percabangan */
+        .branch-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+            margin: 20px 0;
+        }
 
-.branch {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
 
-.label {
-    font-size: 12px;
-    font-weight: bold;
-    color: #e67e22;
-    margin-bottom: 5px;
-}
+        /* Garis Cabang Horizontal */
+        .branch-line-top {
+            width: calc(100% + 50px);
+            height: 2px;
+            background: var(--gray);
+            position: absolute;
+            top: -20px;
+        }
+
+        .label-yes-no {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--orange);
+            background: var(--bg);
+            padding: 2px 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Warna khusus proses */
+        .bpjs-node { border-color: var(--green); background: #e8f5e9; }
+        .umum-node { border-color: var(--blue); background: #e3f2fd; }
+    </style>
+</head>
+<body>
+
+    <h2>Alur Pendaftaran Pasien Rawat Jalan</h2>
+
+    <div class="flow-wrapper">
+        <div class="node start-end">PASIEN TIBA</div>
+        <div class="line"></div>
+        <div class="node">Ambil Nomor Antrean Pendaftaran</div>
+        <div class="line"></div>
+
+        <div class="node decision">Apakah Pasien Baru?</div>
+
+        <div class="branch-container">
+            <div class="branch">
+                <div class="label-yes-no">YA</div>
+                <div class="node">Loket Pendaftaran:<br>Isi Formulir Rekam Medis & Entry Data KTP</div>
+            </div>
+            <div class="branch">
+                <div class="label-yes-no">TIDAK</div>
+                <div class="node">Tunjukkan Kartu Berobat / Sebutkan NIK</div>
+            </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="node decision">Jenis Penjamin?</div>
+
+        <div class="branch-container">
+            <div class="branch">
+                <div class="label-yes-no">BPJS</div>
+                <div class="node bpjs-node">Verifikasi Rujukan Faskes 1 / Surat Kontrol</div>
+                <div class="line"></div>
+                <div class="node bpjs-node">Penerbitan SEP (Surat Eligibilitas Peserta)</div>
+            </div>
+            <div class="branch">
+                <div class="label-yes-no">UMUM</div>
+                <div class="node umum-node">Verifikasi Identitas & Pilih Poliklinik</div>
+                <div class="line"></div>
+                <div class="node umum-node">Pembayaran Administrasi di Kasir</div>
+            </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="node">Cetak Tracer & Berkas Pendaftaran</div>
+        <div class="line"></div>
+        <div class="node">Petugas Mengarahkan ke Ruang Tunggu Poliklinik</div>
+        <div class="line"></div>
+        <div class="node start-end">PEMERIKSAAN DOKTER</div>
+    </div>
+
+</body>
+</html>
