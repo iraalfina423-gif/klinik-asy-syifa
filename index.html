@@ -1,101 +1,28 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Flowchart Pendaftaran Klinik Terpadu</title>
-    <style>
-        :root {
-            --line: #94a3b8;
-            --start: #1e293b;
-            --status: #3b82f6; /* Biru */
-            --payment: #f59e0b; /* Kuning */
-            --medis: #10b981; /* Hijau */
-        }
-        body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; padding: 20px; }
-        .flow-wrapper { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        
-        /* Node Styles */
-        .node {
-            padding: 12px 20px; border: 2px solid #334155; background: white;
-            border-radius: 6px; width: 220px; text-align: center; font-size: 13px;
-        }
-        .start { background: var(--start); color: white; border-radius: 30px; font-weight: bold; }
-        
-        /* Decision (Diamond) */
-        .decision {
-            width: 100px; height: 100px; background: #fff; border: 2px solid #334155;
-            transform: rotate(45deg); display: flex; align-items: center; 
-            justify-content: center; margin: 20px 0;
-        }
-        .decision span { transform: rotate(-45deg); font-weight: bold; font-size: 11px; text-align: center; }
-
-        /* Container untuk percabangan */
-        .row { display: flex; gap: 30px; position: relative; margin-top: 10px; }
-        .col { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-
-        /* Garis Penghubung */
-        .arrow-v { width: 2px; height: 30px; background: var(--line); position: relative; }
-        .arrow-v::after { content: '▼'; position: absolute; bottom: -8px; left: -5px; color: var(--line); font-size: 10px; }
-
-        .label { font-size: 10px; font-weight: bold; color: #ef4444; text-transform: uppercase; }
-    </style>
-</head>
-<body>
-
-<div class="flow-wrapper">
-    <div class="node start">PASIEN DATANG</div>
-    <div class="arrow-v"></div>
-
-    <div class="decision"><span>Status Pasien?</span></div>
-    <div class="row">
-        <div class="col">
-            <div class="label">Pasien Baru</div>
-            <div class="node" style="border-left: 5px solid var(--status)">Menunjukkan Kartu Identitas (KTP, KK, SIM) untuk registrasi</div>
+  <!-- Flowchart Alur Pendaftaran -->
+    <section id="alur" class="my-5">
+      <h2 class="text-center mb-5 text-primary fw-bold">Alur Pendaftaran Pasien Rawat Jalan</h2>
+      <div class="flowchart">
+        <div class="mermaid">
+          flowchart TD
+              Start[Pasien Datang ke Klinik] --> Cek{BPJS/Umum?}
+              Cek -->|Ya| BPJS[Loket BPJS - Verifikasi Kartu]
+              Cek -->|Tidak| Umum[Loket Umum - Isi Form & Bayar]
+              
+              BPJS --> Antri[Dapat Nomor Antrian]
+              Umum --> Antri
+              
+              Antri --> Tunggu[Menunggu di Ruang Tunggu]
+              Tunggu --> Poli[Dipanggil ke Poli yang Dituju]
+              Poli --> Dokter[Periksa Dokter]
+              Dokter --> Resep[Ada Resep / Tindakan?]
+              Resep -->|Ya| Apotek[Ke Apotek / Kasir]
+              Resep -->|Tidak| Selesai[Selesai & Pulang]
+              Apotek --> Selesai
+              
+              style Start fill:#007bff,stroke:#fff,color:#fff
+              style Selesai fill:#28a745,stroke:#fff,color:#fff
+              style BPJS fill:#ffc107,stroke:#333,color:#000
+              style Umum fill:#fd7e14,stroke:#fff,color:#fff
         </div>
-        <div class="col">
-            <div class="label">Pasien Lama</div>
-            <div class="node" style="border-left: 5px solid var(--status)">Menunjukkan Kartu Berobat atau Kartu Identitas</div>
-        </div>
-    </div>
-
-    <div class="arrow-v"></div>
-
-    <div class="decision"><span>Jenis Bayar?</span></div>
-    <div class="row">
-        <div class="col">
-            <div class="label">BPJS</div>
-            <div class="node" style="border-left: 5px solid var(--payment)">Cek Kepesertaan BPJS dan status aktif/non-aktif</div>
-        </div>
-        <div class="col">
-            <div class="label">UMUM</div>
-            <div class="node" style="border-left: 5px solid var(--payment)">Melakukan Pembayaran biaya pendaftaran (administrasi)</div>
-        </div>
-    </div>
-
-    <div class="arrow-v"></div>
-    <div class="node">Pemilihan Poli Tujuan</div>
-    
-    <div class="arrow-v"></div>
-    <div class="node" style="background: #ecfdf5;">Pemeriksaan Dokter di Poli</div>
-    <div class="arrow-v"></div>
-
-    <div class="decision"><span>Perlu Kontrol?</span></div>
-    <div class="row">
-        <div class="col">
-            <div class="label">Ya</div>
-            <div class="node" style="border-left: 5px solid var(--medis)">Penjadwalan Kontrol</div>
-        </div>
-        <div class="col">
-            <div class="label">Tidak</div>
-            <div class="node" style="border-left: 5px solid var(--medis)">Edukasi Selesai Berobat</div>
-        </div>
-    </div>
-
-    <div class="arrow-v"></div>
-    <div class="node">Farmasi (Ambil Obat) & Kasir Akhir untuk pasien umum</div>
-    <div class="arrow-v"></div>
-    <div class="node start" style="background: #059669;">PASIEN PULANG</div>
-</div>
-
-</body>
-</html>
+      </div>
+    </section>
