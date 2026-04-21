@@ -1,7 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <<!DOCTYPE html>
+<html lang="id">
+<head>
     <meta charset="UTF-8">
+    <title>SOP Detail Pendaftaran Pasien</title>
+    <style>
+        :root {
+            --border-color: #334155;
+            --box-bg: #ffffff;
+            --decision-bg: #fff7ed;
+            --line-color: #64748b;
+        }
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; padding: 40px; color: #1e293b; }
+        
+        .container { max-width: 900px; margin: auto; display: flex; flex-direction: column; align-items: center; }
+
+        /* Simbol Standar Flowchart */
+        .process {
+            width: 280px; padding: 15px; border: 2px solid var(--border-color);
+            background: var(--box-bg); text-align: center; margin: 10px 0;
+            border-radius: 4px; position: relative; font-size: 14px;
+        }
+
+        .decision {
+            width: 140px; height: 140px; border: 2px solid #b45309;
+            background: var(--decision-bg); transform: rotate(45deg);
+            display: flex; align-items: center; justify-content: center;
+            margin: 30px 0; text-align: center;
+        }
+        .decision span { transform: rotate(-45deg); font-weight: bold; font-size: 12px; }
+
+        .terminal {
+            width: 200px; padding: 10px; border: 2px solid var(--border-color);
+            background: #1e293b; color: white; border-radius: 50px;
+            text-align: center; font-weight: bold; text-transform: uppercase;
+        }
+
+        /* Garis & Arah */
+        .line { width: 2px; height: 30px; background: var(--line-color); position: relative; }
+        .line::after {
+            content: '▼'; position: absolute; bottom: -10px; left: -6px;
+            color: var(--line-color); font-size: 12px;
+        }
+
+        .row { display: flex; gap: 60px; width: 100%; justify-content: center; }
+        .branch-label { font-size: 11px; font-weight: bold; color: #e11d48; margin-bottom: 5px; }
+        
+        .sub-text { font-size: 11px; color: #64748b; display: block; margin-top: 5px; }
+        
+        h2 { margin-bottom: 30px; color: #0f172a; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>SOP Alur Pelayanan Rawat Jalan Klinik</h2>
+
+    <div class="terminal">Mulai</div>
+    <div class="line"></div>
+
+    <div class="process">
+        <b>Kedatangan Pasien</b>
+        <span class="sub-text">Ambil nomor antrean & Skrining Visual (Protokol Kesehatan/Gawat Darurat)</span>
+    </div>
+    <div class="line"></div>
+
+    <div class="decision"><span>Status<br>Registrasi?</span></div>
+    
+    <div class="row">
+        <div>
+            <div class="branch-label">PASIEN BARU</div>
+            <div class="process">
+                <b>Pendaftaran Pasien Baru</b>
+                <span class="sub-text">- Isi formulir identitas (KTP/KK)<br>- Input data SIMRS<br>- Pembuatan berkas Rekam Medis</span>
+            </div>
+        </div>
+        <div>
+            <div class="branch-label">PASIEN LAMA</div>
+            <div class="process">
+                <b>Pendaftaran Pasien Lama</b>
+                <span class="sub-text">- Tunjukkan Kartu Berobat/KTP<br>- Penarikan data Rekam Medis (Tracer)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="decision"><span>Metode<br>Pembayaran?</span></div>
+
+    <div class="row">
+        <div>
+            <div class="branch-label">BPJS / ASURANSI</div>
+            <div class="process">
+                <b>Verifikasi Penjamin</b>
+                <span class="sub-text">- Cek aktifasi kartu<br>- Validasi rujukan/Fingerprint<br>- Cetak SEP (Surat Eligibilitas)</span>
+            </div>
+        </div>
+        <div>
+            <div class="branch-label">UMUM / MANDIRI</div>
+            <div class="process">
+                <b>Billing Registrasi</b>
+                <span class="sub-text">- Input biaya administrasi<br>- Pembayaran di kasir awal (opsional)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="line"></div>
+    <div class="process" style="background: #ecfdf5; border-color: #059669;">
+        <b>Ruang Tunggu Poli</b>
+        <span class="sub-text">- Pemeriksaan Tanda Vital (Tensi/Suhu)<br>- Pemeriksaan Dokter</span>
+    </div>
+    <div class="line"></div>
+
+    <div class="decision"><span>Rencana Tindak<br>Lanjut?</span></div>
+
+    <div class="row">
+        <div>
+            <div class="branch-label">PERLU KONTROL</div>
+            <div class="process">
+                <b>Penjadwalan Kunjungan</b>
+                <span class="sub-text">- Edukasi jadwal dokter<br>- Input rencana kontrol di sistem</span>
+            </div>
+        </div>
+        <div>
+            <div class="branch-label">TIDAK/SELESAI</div>
+            <div class="process">
+                <b>Penyelesaian</b>
+                <span class="sub-text">- Edukasi Pasien pulang<br>- Penutupan berkas RM</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="line"></div>
+    <div class="process">
+        <b>Farmasi & Kasir Akhir</b>
+        <span class="sub-text">- Penyerahan Obat & Edukasi<br>- Pelunasan biaya tindakan/obat</span>
+    </div>
+    
+    <div class="line"></div>
+    <div class="terminal" style="background: #059669;">Selesai</div>
+</div>
+
+</body>
+</html>meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flowchart Pendaftaran Klinik</title>
     <style>
