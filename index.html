@@ -2,84 +2,121 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flowchart Pendaftaran Klinik</title>
     <style>
-        body { font-family: sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding: 20px; }
-        .flowchart { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        
-        .box {
-            background: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            border: 2px solid #2c3e50;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 250px;
-            position: relative;
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --success: #27ae60;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --bg: #f8f9fa;
         }
 
-        /* Simbol Keputusan (Belah Ketupat) */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); display: flex; flex-direction: column; align-items: center; padding: 40px; }
+        
+        /* Container Utama */
+        .flow-container { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+
+        /* Komponen Box */
+        .node {
+            background: white;
+            padding: 15px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            min-width: 180px;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .start-end { border-radius: 50px; background: var(--primary); color: white; }
+
+        /* Simbol Keputusan (Diamond) */
         .decision {
-            background: #f1c40f;
-            width: 150px;
-            height: 150px;
+            background: var(--warning);
+            width: 120px;
+            height: 120px;
             transform: rotate(45deg);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 20px 0;
+            border: 2px solid #d4ac0d;
         }
-        .decision span { transform: rotate(-45deg); font-weight: bold; }
+        .decision span { transform: rotate(-45deg); font-size: 0.9em; font-weight: bold; text-align: center; }
 
-        /* Garis Penghubung */
-        .arrow { width: 2px; height: 20px; background: #2c3e50; position: relative; }
+        /* Baris untuk percabangan */
+        .row { display: flex; gap: 40px; justify-content: center; width: 100%; margin: 10px 0; }
+        .branch { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+
+        /* Garis Panah */
+        .arrow { width: 2px; height: 30px; background: var(--primary); position: relative; }
         .arrow::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: -4px;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 10px solid #2c3e50;
+            content: ''; position: absolute; bottom: -5px; left: -4px;
+            border-left: 5px solid transparent; border-right: 5px solid transparent;
+            border-top: 10px solid var(--primary);
         }
 
-        .row { display: flex; gap: 50px; align-items: flex-start; }
-        .start-end { border-radius: 50px; background: #e74c3c; color: white; font-weight: bold; }
+        .label { font-size: 0.8em; font-weight: bold; color: var(--danger); margin-bottom: -10px; }
     </style>
 </head>
 <body>
 
-<div class="flowchart">
-    <div class="box start-end">MULAI</div>
+<div class="flow-container">
+    <div class="node start-end">PASIEN DATANG</div>
+    <div class="arrow"></div>
+    <div class="node">Ambil Antrean & Skrining</div>
     <div class="arrow"></div>
 
-    <div class="box">Ambil Nomor Antrean & Skrining</div>
-    <div class="arrow"></div>
-
-    <div class="decision">
-        <span>Pasien Baru?</span>
+    <div class="decision"><span>Status Pasien?</span></div>
+    
+    <div class="row">
+        <div class="branch">
+            <div class="label">PASIEN BARU</div>
+            <div class="node">Isi Formulir & Input Database</div>
+        </div>
+        <div class="branch">
+            <div class="label">PASIEN LAMA</div>
+            <div class="node">Verifikasi Identitas / No. RM</div>
+        </div>
     </div>
+
+    <div class="arrow"></div>
+
+    <div class="decision"><span>Metode Bayar?</span></div>
 
     <div class="row">
-        <div class="flowchart">
-            <div class="box" style="border-color: #27ae60;"><b>YA:</b> Isi Formulir & Input Data Pasien</div>
-            <div class="arrow"></div>
-            <div class="box">Pilih Poli & Dokter Tujuan</div>
+        <div class="branch">
+            <div class="label">BPJS / ASURANSI</div>
+            <div class="node">Verifikasi Rujukan & SEP</div>
         </div>
-
-        <div class="flowchart">
-            <div class="box" style="border-color: #2980b9;"><b>TIDAK:</b> Verifikasi Rekam Medis / Kartu Berobat</div>
-            <div class="arrow"></div>
-            <div class="box">Pilih Poli & Dokter Tujuan</div>
+        <div class="branch">
+            <div class="label">UMUM</div>
+            <div class="node">Registrasi Mandiri</div>
         </div>
     </div>
 
     <div class="arrow"></div>
-    
-    <div class="box">Administrasi (Umum / BPJS / Asuransi)</div>
+    <div class="node" style="background: var(--success); color: white;">Pemeriksaan Dokter (Poli)</div>
     <div class="arrow"></div>
 
-    <div class="box start-end" style="background: #27ae60;">MENUJU RUANG TUNGGU</div>
+    <div class="decision"><span>Perlu Kontrol?</span></div>
+
+    <div class="row">
+        <div class="branch">
+            <div class="label">YA</div>
+            <div class="node">Pembuatan Jadwal Kontrol Baru</div>
+        </div>
+        <div class="branch">
+            <div class="label">TIDAK</div>
+            <div class="node">Selesai / Ambil Obat</div>
+        </div>
+    </div>
+
+    <div class="arrow"></div>
+    <div class="node start-end">PASIEN PULANG</div>
 </div>
 
 </body>
