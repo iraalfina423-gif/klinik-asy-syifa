@@ -1,55 +1,22 @@
- <div class="flowchart">
-    <div class="mermaid">
-      flowchart TD
-          %% Node Awal
-          Start[Pasien Datang ke Klinik] --> CekStatus{Pasien Baru/Lama?}
-          
-          %% Percabangan Status Pasien
-          CekStatus -->|Baru| Baru[Menunjukkan Kartu Identitas KTP/KK/SIM untuk registrasi]
-          CekStatus -->|Lama| Lama[Menunjukkan Kartu Berobat atau Kartu Identitas]
-          
-          Baru --> CekBayar{BPJS/Umum?}
-          Lama --> CekBayar
-          
-          %% Percabangan Jenis Pembayaran
-          CekBayar -->|BPJS| BPJS[Cek Kepesertaan BPJS dan status aktif/non-aktif]
-          CekBayar -->|Umum| Umum[Melakukan Pembayaran biaya pendaftaran administrasi]
-          
-          BPJS --> Antri[Pemilihan Poli Tujuan & Dapat Nomor Antrean]
-          Umum --> Antri
-          
-          %% Alur Pelayanan Poli
-          Antri --> Tunggu[Menunggu di Ruang Tunggu]
-          Tunggu --> Poli[Dipanggil ke Poli yang Dituju]
-          Poli --> Dokter[Pemeriksaan Dokter di Poli]
-          
-          %% Percabangan Kontrol
-          Dokter --> CekKontrol{Perlu Kontrol?}
-          CekKontrol -->|Ya| Kontrol[Penjadwalan Kontrol Kembali]
-          CekKontrol -->|Tidak| SelesaiBerobat[Edukasi Selesai Berobat]
-          
-          Kontrol --> ResepCheck{Ada Resep/Tindakan?}
-          SelesaiBerobat --> ResepCheck
-          
-          %% Alur Farmasi dan Kasir
-          ResepCheck -->|Ya| Farmasi[Farmasi: Pengambilan Obat]
-          ResepCheck -->|Tidak| FinalCheck{Pasien Umum?}
-          
-          Farmasi --> FinalCheck
-          
-          FinalCheck -->|Ya| Kasir[Kasir: Pelunasan Biaya Tindakan & Obat]
-          FinalCheck -->|Tidak| Selesai[Pasien Pulang]
-          
-          Kasir --> Selesai
+graph TD
+    A([Mulai]) --> B[Pasien Menyiapkan Smartphone]
+    B --> C[Pasien Membuka Aplikasi Kamera / QR Scanner]
+    C --> D[Mengarahkan Kamera ke Barcode Pendaftaran]
+    D --> E{Barcode Terdeteksi?}
+    E -- Tidak --> F[Sesuaikan Posisi/Pencahayaan Kamera]
+    F --> D
+    E -- Ya --> G[Muncul Notifikasi Link URL Website]
+    G --> H[Pasien Mengklik Link URL Tersebut]
+    H --> I[Browser Smartphone Membuka Situs]
+    I --> J[Sistem Memuat Menggunakan Jaringan Internet]
+    J --> K{Koneksi Internet Stabil?}
+    K -- Tidak --> L[Tampilkan Pesan Error / Loading Timeout]
+    L --> J
+    K -- Ya --> M[Halaman Utama Website Terbuka Sukses]
+    M --> N([Selesai])
 
-          %% Styling Visual
-          style Start fill:#1e293b,stroke:#fff,color:#fff
-          style Selesai fill:#28a745,stroke:#fff,color:#fff
-          style BPJS fill:#ffc107,stroke:#333,color:#000
-          style Umum fill:#fd7e14,stroke:#fff,color:#fff
-          style Kasir fill:#e74c3c,stroke:#fff,color:#fff
-          style Baru fill:#f0f4ff,stroke:#3b82f6
-          style Lama fill:#f0f4ff,stroke:#3b82f6
-          style Kontrol fill:#d1fae5,stroke:#059669
-    </div>
-  </div>
+    style A fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
+    style E fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:#000
+    style K fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:#000
+    style M fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
+    style N fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
