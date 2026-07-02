@@ -1,22 +1,19 @@
-graph TD
-    A([Mulai]) --> B[Pasien Menyiapkan Smartphone]
-    B --> C[Pasien Membuka Aplikasi Kamera / QR Scanner]
-    C --> D[Mengarahkan Kamera ke Barcode Pendaftaran]
-    D --> E{Barcode Terdeteksi?}
-    E -- Tidak --> F[Sesuaikan Posisi/Pencahayaan Kamera]
-    F --> D
-    E -- Ya --> G[Muncul Notifikasi Link URL Website]
-    G --> H[Pasien Mengklik Link URL Tersebut]
-    H --> I[Browser Smartphone Membuka Situs]
-    I --> J[Sistem Memuat Menggunakan Jaringan Internet]
-    J --> K{Koneksi Internet Stabil?}
-    K -- Tidak --> L[Tampilkan Pesan Error / Loading Timeout]
-    L --> J
-    K -- Ya --> M[Halaman Utama Website Terbuka Sukses]
-    M --> N([Selesai])
-
-    style A fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
-    style E fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:#000
-    style K fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:#000
-    style M fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
-    style N fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+<!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <img src="https://i.ibb.co.com/3J756VV/1776608637292.png" height="100" alt="LOGO"/>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link fw-bold" href="#beranda">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="#layanan">Layanan</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="#alur">Alur Pendaftaran</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="#lokasi">Lokasi & Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
